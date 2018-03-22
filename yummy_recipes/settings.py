@@ -80,6 +80,18 @@ DATABASES = {
     }
 }
 
+# You can switch database engine to postgres or mysql using environment
+# variable 'DB'. Travis CI does this.
+if os.environ.get("DB") == "postgres":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'NAME': 'django_recipes_api',
+            'TEST': {'CHARSET': 'UTF8'}
+        }
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
