@@ -113,4 +113,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         payload = jwt_payload_handler(self)
         token = jwt_encode_handler(payload)
 
-        return token.decode('utf-8')
+        return token
