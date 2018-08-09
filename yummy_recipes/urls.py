@@ -19,6 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('authentication.urls', namespace='authentication')),
+    url(r'^api/', include('api.urls', namespace='api')),
     # rest_framework urls for session authentication for the browsable api
     url(r'^api-auth/', include('rest_framework.urls')),
 ]

@@ -3,9 +3,13 @@ from authentication.models import User
 
 
 class Category(models.Model):
+    
+    class Meta:
+        verbose_name_plural = 'categories'
+    
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -18,7 +22,7 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category, related_name='categories',
                                  on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     ingredients = models.TextField()
     directions = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -32,7 +36,7 @@ class Recipe(models.Model):
 class Review(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='recipes',
                                on_delete=models.CASCADE)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
 
 class Upvote(models.Model):
