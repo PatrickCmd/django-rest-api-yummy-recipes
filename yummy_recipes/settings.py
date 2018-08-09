@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django_extensions',
     'rest_framework',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,18 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=5184000),
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=60),
 }
+
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--cover-erase',
+    '-v',
+    '--with-coverage',
+    '--cover-package=authentication,api',
+    '--cover-html',
+]
 
 
 # Internationalization
