@@ -100,10 +100,9 @@ class TestCategoryTestCase(APITestCase):
         '''
         test delete category detail
         '''
-        print(Category.objects.get(name='test category').pk)
         request = self.factory.delete(self.uri)
         force_authenticate(request, user=self.test_user)
-        response = self.view_detail(request, pk=2)
+        response = self.view_detail(request, pk=1)
         self.assertEqual(response.status_code, 204,
                          'Expected Response Code 204, received {0} instead.'
                          .format(response.status_code))
