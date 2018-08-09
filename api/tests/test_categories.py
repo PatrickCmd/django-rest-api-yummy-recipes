@@ -113,9 +113,6 @@ class TestCategoryTestCase(APITestCase):
         '''
         test retrieve category detail when not existing
         '''
-        category = Category.objects.get(name='test category')
-        category.refresh_from_db()
-        print(Category.objects.get(name='test category').pk)
         request = self.factory.get(self.uri)
         force_authenticate(request, user=self.test_user)
         response = self.view_detail(request, pk=2)
