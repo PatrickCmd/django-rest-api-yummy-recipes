@@ -96,18 +96,6 @@ class TestCategoryTestCase(APITestCase):
                          .format(response.status_code))
         self.assertIn('test category', str(response.data))
     
-    def test_category_detail_destroy(self):
-        '''
-        test delete category detail
-        '''
-        request = self.factory.delete(self.uri)
-        force_authenticate(request, user=self.test_user)
-        response = self.view_detail(request, pk=1)
-        self.assertEqual(response.status_code, 204,
-                         'Expected Response Code 204, received {0} instead.'
-                         .format(response.status_code))
-        self.assertNotIn('test category', str(response.data))
-    
     def test_category_not_existing_detail(self):
         '''
         test retrieve category detail when not existing
@@ -119,3 +107,16 @@ class TestCategoryTestCase(APITestCase):
                          'Expected Response Code 404, received {0} instead.'
                          .format(response.status_code))
         self.assertIn('Not found', str(response.data))
+    
+    def test_category_detail_destroy(self):
+        '''
+        test delete category detail
+        '''
+        category = Category.objects.get(name='test category')
+        request = self.factory.delete(self.uri)
+        force_authenticate(request, user=self.test_user)
+        response = self.view_detail(request, pk=category.pk)
+        self.assertEqual(response.status_code, 204,
+                         'Expected Response Code 204, received {0} instead.'
+                         .format(response.status_code))
+        self.assertNotIn('test category', str(response.data))
