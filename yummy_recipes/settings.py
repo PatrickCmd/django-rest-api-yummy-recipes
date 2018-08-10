@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'django_nose',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
