@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.exceptions import (
     ValidationError, PermissionDenied
@@ -37,6 +38,47 @@ class CategoryViewSet(viewsets.ModelViewSet):
         if not request.user == category.owner:
             raise PermissionDenied("You can not delete this category")
         return super().destroy(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class CategoryRecipes(generics.ListCreateAPIView):
+    
+    def get_queryset(self):
+        if self.kwargs.get("category_pk"):
+            category = Category.objects.get(pk=self.kwargs["category_pk"])
+            queryset = Recipe.objects.filter(
+                owner=self.request.user,
+                category=category
+            )
+        return queryset
+    serializer_class = RecipeSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class SingleCategoryRecipe(generics.RetrieveUpdateDestroyAPIView):
+    
+    def get_queryset(self):
+        if self.kwargs.get("category_pk") and self.kwargs.get("pk"):
+            category = Category.objects.get(pk=self.kwargs["category_pk"])
+            queryset = Recipe.objects.filter(
+                pk=self.kwargs["pk"],
+                owner=self.request.user,
+                category=category
+            )
+        return queryset
+    serializer_class = RecipeSerializer
+
+
+class RecipesViewSet(viewsets.ModelViewSet):
+    
+    def get_queryset(self):
+        queryset = Recipe.objects.all().filter(owner=self.request.user)
+        return queryset
+    serializer_class = RecipeSerializer
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

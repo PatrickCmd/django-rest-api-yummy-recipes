@@ -20,12 +20,15 @@ class UpvoteSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     reviews = ReviewSerialiZer(many=True, read_only=True, required=False)
     upvotes = UpvoteSerializer(many=True, read_only=True, required=False)
 
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = ('id', 'name', 'description', 'owner', 'category',
+                  'ingredients', 'reviews', 'upvotes', 'is_public',
+                  'created_at', 'updated_at')
 
 
 class CategorySerializer(serializers.ModelSerializer):
