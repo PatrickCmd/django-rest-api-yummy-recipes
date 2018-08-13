@@ -4,7 +4,7 @@ from rest_framework.test import APIRequestFactory
 from rest_framework.test import force_authenticate
 
 from api import views
-from api.models import Category, Recipe
+from api.models import Category, Recipe, Review
 
 
 class TestRecipesTestCase(APITestCase):
@@ -17,11 +17,18 @@ class TestRecipesTestCase(APITestCase):
             {'get': 'retrieve', 'delete': 'destroy'}
         )
         self.category_recipes_view = views.CategoryRecipes.as_view()
+        self.public_recipes_view = views.PublicRecipes.as_view()
+        self.public_recipes_detail = views.PublicRecipesDetail.as_view()
+        self.recipe_reviews = views.RecipeReviews.as_view({'get': 'list', 
+                                                          'post': 'create'})
         self.category_uri = '/categories/'
         self.recipe_uri = '/recipes/'
+        self.public_recipes_uri = '/public-recipes/'
         self.test_user = self.setup_user()
         self.category = self.setup_category()
         self.recipe = self.setup_recipe()
+        self.public_recipe = self.setup_public_recipe()
+        self.recipe_review = self.setup_recipe_review()
     
     @staticmethod
     def setup_user():
@@ -53,6 +60,28 @@ class TestRecipesTestCase(APITestCase):
         )
         recipe.save()
         return recipe
+    
+    @staticmethod
+    def setup_public_recipe():
+        recipe = Recipe.objects.create(
+            name='test public recipe',
+            owner=get_user_model().objects.get(username='test1'),
+            category=Category.objects.get(name='test category'),
+            description='sweet and flavor recipe',
+            ingredients='Onions, Tomatoes',
+            is_public=True
+        )
+        recipe.save()
+        return recipe
+    
+    @staticmethod
+    def setup_recipe_review():
+        review = Review.objects.create(
+            comment="Awesome recipe",
+            recipe=Recipe.objects.get(name='test public recipe')
+        )
+        review.save()
+        return review
     
     def test_recipes_list(self):
         '''
@@ -155,3 +184,38 @@ class TestRecipesTestCase(APITestCase):
                          'Expected Response Code 201, received {0} instead.'
                          .format(response.status_code))
         self.assertIn('test recipe3', str(response.data))
+    
+    def test_public_recipes_list(self):
+        '''
+        test retrieve all public recipes
+        '''
+        request = self.factory.get(self.public_recipes_uri)
+        response = self.public_recipes_view(request)
+        self.assertEqual(response.status_code, 200,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+        self.assertIn('test public recipe', str(response.data))
+    
+    def test_get_public_recipe_detail(self):
+        '''
+        test retrieve a single public recipe
+        '''
+        request = self.factory.get(self.public_recipes_uri)
+        pk = Recipe.objects.filter(is_public=True).first().pk
+        response = self.public_recipes_detail(request, pk=pk)
+        self.assertEqual(response.status_code, 200,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+        self.assertIn('test public recipe', str(response.data))
+    
+    def test_get_recipe_reviews(self):
+        '''
+        test retrieve recipe reviews
+        '''
+        request = self.factory.get(self.public_recipes_uri)
+        pk = Recipe.objects.filter(is_public=True).first().pk
+        response = self.recipe_reviews(request, pk=pk)
+        self.assertEqual(response.status_code, 200,
+                         'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+        self.assertIn('Awesome recipe', str(response.data))

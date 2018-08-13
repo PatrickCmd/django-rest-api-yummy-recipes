@@ -13,7 +13,7 @@ class ReviewSerialiZer(serializers.ModelSerializer):
 
 
 class UpvoteSerializer(serializers.ModelSerializer):
-
+    voted_by = serializers.ReadOnlyField(source='voted_by.username')
     class Meta:
         model = Upvote
         fields = '__all__'
