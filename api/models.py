@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Recipe(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, related_name='categories',
+    category = models.ForeignKey(Category, related_name='recipes',
                                  on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -34,13 +34,20 @@ class Recipe(models.Model):
 
 
 class Review(models.Model):
-    recipe = models.ForeignKey(Recipe, related_name='recipes',
+    recipe = models.ForeignKey(Recipe, related_name='reviews',
                                on_delete=models.CASCADE)
-    description = models.TextField(blank=True)
+    comment = models.TextField(blank=True)
+    reviewed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.recipe} comment'
 
 
 class Upvote(models.Model):
-    recipe = models.ForeignKey(Recipe, related_name='voted_recipes',
+    recipe = models.ForeignKey(Recipe, related_name='upvotes',
                                on_delete=models.CASCADE)
     voted_by = models.ForeignKey(User, on_delete=models.CASCADE)
     voted_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('recipe', 'voted_by')
