@@ -30,7 +30,7 @@ DEBUG = True
 if os.environ.get("APP_SETTINGS") == "production":
     DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "django-yummy-recipes.herokuapp.com", "localhost"]
 
 
 # Application definition
