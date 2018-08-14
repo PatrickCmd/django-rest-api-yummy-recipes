@@ -83,7 +83,7 @@ $ export DATABASE_URL=postgresql://postgres@localhost:{port}/{dbname} Where port
 ```
 $ python manage.py runserver_plus
 ```
-Execute the **localhost:8000/api** in your browser
+Execute the url **localhost:8000/api** in your browser
 ## Run tests
 Execute this command at the terminal
 ```
