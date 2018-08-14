@@ -1,4 +1,4 @@
-# django-rest-api-yummy-recipes
+# DJANGO REST API YUMMY RECIPES
 
 [![CircleCI](https://circleci.com/gh/PatrickCmd/django-rest-api-yummy-recipes/tree/develop.svg?style=svg)](https://circleci.com/gh/PatrickCmd/django-rest-api-yummy-recipes/tree/develop)
 [![Coverage Status](https://coveralls.io/repos/github/PatrickCmd/django-rest-api-yummy-recipes/badge.svg?branch=develop)](https://coveralls.io/github/PatrickCmd/django-rest-api-yummy-recipes?branch=develop)
@@ -78,3 +78,24 @@ $postgres# CREATE DATABASE {dbname};  Where dbname is the database name
 $ export DB=postgres
 $ export DATABASE_URL=postgresql://postgres@localhost:{port}/{dbname} Where port is the port number for the postgres instance
 ```
+
+## Run the server
+```
+$ python manage.py runserver_plus
+```
+Execute the **localhost:8000/api** in your browser
+## Run tests
+Execute this command at the terminal
+```
+$ python manage.py test
+```
+
+## Documentation
+Visit the links below for the API documentation
+[CoreApi Documentation](https://django-yummy-recipes.herokuapp.com/docs/)
+[Swagger Documentation](https://django-yummy-recipes.herokuapp.com/api_docs/) Login with **username:** normaluser
+**password:** normaluser1234 for complete swagger-docs
+[API Schema](https://django-yummy-recipes.herokuapp.com/schema/)
+
+## Live API
+Vist this [Link](https://django-yummy-recipes.herokuapp.com/api/) for the live application.
