@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.exceptions import (
     ValidationError, PermissionDenied
 )
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import (
     Category, Recipe, Review, Upvote
@@ -14,6 +15,8 @@ from .serializers import (
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
+    
+    permission_classes = (IsAuthenticated,)
     
     def get_queryset(self):
         # list  categories per current loggedin user
@@ -45,6 +48,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class CategoryRecipes(generics.ListCreateAPIView):
     
+    permission_classes = (IsAuthenticated,)
+    
     def get_queryset(self):
         if self.kwargs.get("category_pk"):
             category = Category.objects.get(pk=self.kwargs["category_pk"])
@@ -61,6 +66,8 @@ class CategoryRecipes(generics.ListCreateAPIView):
 
 class SingleCategoryRecipe(generics.RetrieveUpdateDestroyAPIView):
     
+    permission_classes = (IsAuthenticated,)
+    
     def get_queryset(self):
         if self.kwargs.get("category_pk") and self.kwargs.get("pk"):
             category = Category.objects.get(pk=self.kwargs["category_pk"])
@@ -74,6 +81,8 @@ class SingleCategoryRecipe(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RecipesViewSet(viewsets.ModelViewSet):
+    
+    permission_classes = (IsAuthenticated,)
     
     def get_queryset(self):
         queryset = Recipe.objects.all().filter(owner=self.request.user)      
@@ -109,7 +118,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
 
 class PublicRecipes(generics.ListAPIView):
     
-    permission_classes = ()
+    permission_classes = (AllowAny,)
     
     def get_queryset(self):
         queryset = Recipe.objects.all().filter(is_public=True)
@@ -118,7 +127,8 @@ class PublicRecipes(generics.ListAPIView):
 
 
 class PublicRecipesDetail(generics.RetrieveAPIView):
-    permission_classes = ()
+    
+    permission_classes = (AllowAny,)
     
     def get_queryset(self):
         queryset = Recipe.objects.all().filter(is_public=True)
@@ -128,7 +138,7 @@ class PublicRecipesDetail(generics.RetrieveAPIView):
 
 class RecipeReviews(viewsets.ModelViewSet):
     
-    permission_classes = ()
+    permission_classes = (AllowAny,)
     serializer_class = ReviewSerialiZer
     
     def get_queryset(self):
@@ -138,6 +148,7 @@ class RecipeReviews(viewsets.ModelViewSet):
 
 class UpVoteViewSet(viewsets.ModelViewSet):
     
+    permission_classes = (IsAuthenticated,)
     serializer_class = UpvoteSerializer
 
     def get_queryset(self):
