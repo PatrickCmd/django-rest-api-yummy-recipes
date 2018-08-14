@@ -71,7 +71,7 @@ and install postgres(>=10) on Ubuntu-linux platform
 **Create Database**
 ```
 $ psql -U postgres
-$postgres# CREATE DATABASE {dbname};  Where dbname is the database name
+$ postgres# CREATE DATABASE {dbname};  Where dbname is the database name
 ```
 **Setup Database URL environment variable**
 ```
@@ -92,9 +92,12 @@ $ python manage.py test
 
 ## Documentation
 Visit the links below for the API documentation
+
 [CoreApi Documentation](https://django-yummy-recipes.herokuapp.com/docs/)
+
 [Swagger Documentation](https://django-yummy-recipes.herokuapp.com/api_docs/) Login with **username:** normaluser
 **password:** normaluser1234 for complete swagger-docs
+
 [API Schema](https://django-yummy-recipes.herokuapp.com/schema/)
 
 ## Live API
