@@ -117,7 +117,7 @@ POST /api/public-recipes/{id}/reviews | Created a review for a single public rec
 GET /api/public-recipes/{id}/upvotes | GET upvotes for a single public recipe | PUBLIC
 POST /api/public-recipes/{id}/upotes | Up-vote for a single public recipe | PRIVATE
 
-## Documentation
+## API Documentation
 Visit the links below for the API documentation
 
 [CoreApi Documentation](https://django-yummy-recipes.herokuapp.com/docs/)
