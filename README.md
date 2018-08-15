@@ -98,24 +98,24 @@ POST /auth/users/login |Logs a user in | PUBLIC
 GET /auth/users |List registered users| PUBLIC
 POST /api/categories | Creates a new recipe category | PRIVATE
 GET /api/categories | Lists all created recipe categories | PRIVATE
-GET /api/categories/id | Gets a single recipe category with the suppled id | PRIVATE
-PUT /api/categories/id | Updates recipe category with the suppled id | PRIVATE
-DELETE /api/categories/id | Deletes recipe_category with the suppled id | PRIVATE
+GET /api/categories/{id} | Gets a single recipe category with the suppled id | PRIVATE
+PUT /api/categories/{id} | Updates recipe category with the suppled id | PRIVATE
+DELETE /api/categories/{id} | Deletes recipe_category with the suppled id | PRIVATE
 POST /api/recipes | Creates a new recipe | PRIVATE
 GET /api/recipes | List all recipes | PRIVATE
-PUT /api/recipes/id | Updates a recipe item | PRIVATE
-DELETE /api/recipes/id | Deletes arecipe in a recipe category | PRIVATE
+PUT /api/recipes/{id}| Updates a recipe item | PRIVATE
+DELETE /api/recipes/{id} | Deletes arecipe in a recipe category | PRIVATE
 GET /api/categories/{category_pk}/recipes | GET recipes in a category | PRIVATE
 POST /api/categories/{category_pk}/recipes | Create recipes in a category | PRIVATE
-GET /api/categories/{category_pk}/recipes/id | GET single recipe in a category | PRIVATE
-PUT /api/categories/{category_pk}/recipes/id | Update a recipe in a recipe category | PRIVATE
-DELETE /api/categories/{category_pk}/recipes/id | Deletes a recipe in a recipe category | PRIVATE
+GET /api/categories/{category_pk}/recipes/{id} | GET single recipe in a category | PRIVATE
+PUT /api/categories/{category_pk}/recipes/{id} | Update a recipe in a recipe category | PRIVATE
+DELETE /api/categories/{category_pk}/recipes/{id} | Deletes a recipe in a recipe category | PRIVATE
 GET /api/public-recipes/ | GET public recipes | PUBLIC
-GET /api/public-recipes/id | GET a single public recipe | PUBLIC
-GET /api/public-recipes/id/reviews | GET posted reviews for a single public recipe | PUBLIC
-POST /api/public-recipes/id/reviews | Created a review for a single public recipe | PUBLIC
-GET /api/public-recipes/id/upvotes | GET upvotes for a single public recipe | PUBLIC
-POST /api/public-recipes/id/upotes | Up-vote for a single public recipe | PRIVATE
+GET /api/public-recipes/{id} | GET a single public recipe | PUBLIC
+GET /api/public-recipes/{id}/reviews | GET posted reviews for a single public recipe | PUBLIC
+POST /api/public-recipes/{id}/reviews | Created a review for a single public recipe | PUBLIC
+GET /api/public-recipes/{id}/upvotes | GET upvotes for a single public recipe | PUBLIC
+POST /api/public-recipes/{id}/upotes | Up-vote for a single public recipe | PRIVATE
 
 ## Documentation
 Visit the links below for the API documentation
