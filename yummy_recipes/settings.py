@@ -98,8 +98,8 @@ if os.environ.get("DB") == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'NAME': 'django_recipes_api',
+            'USER': os.environ.get('DB_USER'),
+            'NAME': os.environ.get('DB_NAME'),
             'TEST': {'CHARSET': 'UTF8'}
         }
     }

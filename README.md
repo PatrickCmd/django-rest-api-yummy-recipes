@@ -51,7 +51,8 @@ $postgres# CREATE DATABASE {dbname};  Where dbname is the database name
 **Setup Database URL environment variable**
 ```
 $ SET DB=postgres
-$ SET DATABASE_URL=postgresql://postgres@localhost:{port}/{dbname} Where port is the port number for the postgres instance
+$ SET DB_NAME={dbname} Where dbname is the database name for the postgres instance
+$ SET DB_USER={dbuser} Where dbuser is the database user for the postgres instance
 ```
 
 ### ON MAC/UBUNTU
@@ -76,7 +77,8 @@ $ postgres# CREATE DATABASE {dbname};  Where dbname is the database name
 **Setup Database URL environment variable**
 ```
 $ export DB=postgres
-$ export DATABASE_URL=postgresql://postgres@localhost:{port}/{dbname} Where port is the port number for the postgres instance
+$ export DB_NAME={dbname} Where dbname is the database name for the postgres instance
+$ export DB_USER={dbuser} Where dbuser is the database user for the postgres instance
 ```
 
 ## Run the server
