@@ -1,3 +1,5 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
@@ -54,3 +56,9 @@ class UserListViewSet(ReadOnlyModelViewSet):
     queryset = User.objects.all()
     permission_classes = (AllowAny, )
     serializer_class = UserListSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter,
+                       filters.OrderingFilter)
+    filter_fields = ('username',)
+    search_fields = ('username',)
+    ordering_fields = ('username', 'email')
+    ordering = ('username')
