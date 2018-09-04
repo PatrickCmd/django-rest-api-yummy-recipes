@@ -162,14 +162,14 @@ JWT_AUTH = {
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-# Tell nose to measure coverage on the 'foo' and 'bar' apps
-NOSE_ARGS = [
-    '--cover-erase',
-    '-v',
-    '--with-coverage',
-    '--cover-package=authentication,api',
-    '--cover-html',
-]
+# Tell nose to measure coverage on the 'authentication' and 'api' apps
+# NOSE_ARGS = [
+#     '--cover-erase',
+#     '-v',
+#     '--with-coverage',
+#     '--cover-package=authentication,api',
+#     '--cover-html',
+# ]
 
 
 # Internationalization
