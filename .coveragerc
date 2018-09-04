@@ -1,0 +1,14 @@
+[report]
+omit = 
+    manage.py
+    api/admin.py
+    api/apps.py
+    api/__init__.py
+    authentication/admin.py
+    authentication/apps.py
+    authentication/__init__.py
+    yummy_recipes/*
+    */tests/*
+    */migrations/*
+    */python?.?/*
+    */site-packages/*
